@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Common.css";
+import SubtractTime from "./subtractTime";
 
 const AddingTime = () => {
   const [hovers, setHovers] = useState("");
@@ -50,6 +51,22 @@ const AddingTime = () => {
             placeholder="Enter hours (digits or integer format)"
             className="time-hover__field"
           />
+          <div className="time-add__icon">
+            <svg
+              viewBox="0 0 24 24"
+              width="32"
+              height="32"
+              stroke="#8e8e8e"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+
           <input
             type="number"
             value={minutes}
@@ -67,39 +84,15 @@ const AddingTime = () => {
               Add Time
             </button>
           </div>
-          <div> Your total hours is : {totalHovers}</div>
-          <div>Your total minutes is : {totalMinutes}</div>
+
+          <p className="time-total__hover">
+            Your total hover is: {totalHovers}
+          </p>
+          <p className="time-total-minute">
+            Your total minute is: {totalMinutes}
+          </p>
         </div>
-
-        <div className="time-sub__management">
-          <p className="time-sub__heading">Substract Time (Calculate)</p>
-          <input
-            type="number"
-            value={hovers}
-            onChange={(e) => setHovers(e.target.value)}
-            placeholder="Enter hours (digits or integer format)"
-            className="time-hover__field"
-          />
-          <input
-            type="number"
-            value={minutes}
-            onChange={(e) => setMinutes(e.target.value)}
-            placeholder="Enter minutes (digits or integer format)"
-            className="time-minute__field"
-          />
-
-          <div className="time-button__wrapper">
-            <button onClick={handleReset} className="reset-time__button">
-              Reset
-            </button>
-
-            <button onClick={handleAddingTime} className="add-time__button">
-              Substract Time
-            </button>
-          </div>
-          <div> Your total hours is : {totalHovers}</div>
-          <div>Your total minutes is : {totalMinutes}</div>
-        </div>
+        <SubtractTime />
       </div>
     </div>
   );
