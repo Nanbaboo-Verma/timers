@@ -1,3 +1,83 @@
-time-heading{
-    
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.time-management {
+  margin: 20px;
+}
+.time-management__heading {
+  text-align: center;
+  margin-bottom: 62px;
+  font-size: 40px;
+  font-weight: 700;
+}
+.time-adding__heading,
+.time-sub__heading {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.time-management__wrapper {
+  display: flex;
+  gap: 44px;
+}
+.time-adding__management,
+.time-sub__management {
+  width: 50%;
+  border: 0.5px solid silver;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.2),
+    0 0 10px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.time-hover__field,
+.time-minute__field {
+  width: calc(100% - 22px);
+  padding: 16px 10px;
+  margin-bottom: 20px;
+  border: 1px solid silver;
+  border-radius: 4px;
+}
+/* Button Css */
+.time-button__wrapper {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+.add-time__button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+}
+.reset-time__button {
+  border: 1px solid silver;
+}
+.add-time__button,
+.reset-time__button {
+  border-radius: 4px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 700px) {
+  .time-management__heading {
+    margin-bottom: 40px;
+  }
+  .time-management__wrapper {
+    flex-direction: column;
+  }
+  .time-adding__management,
+  .time-sub__management {
+    width: calc(100% - 42px);
+  }
+  .time-button__wrapper {
+    justify-content: space-between;
+  }
+  .add-time__button,
+  .reset-time__button {
+    width: 50%;
+  }
 }

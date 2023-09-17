@@ -1,67 +1,108 @@
-import { Button, Col, Divider, Form, Input, Layout, Row } from 'antd'
-import React, { useState } from 'react'
-import "./Common.css"
+import React, { useState } from "react";
+import "./Common.css";
 
 const AddingTime = () => {
-    const [hovers,setHovers]=useState(0);
-    const [minutes,setMinutes]=useState(0);
-    const [totalHovers,setTotalHovers]=useState(0);
-    const [totalMinutes,setTodalMinutes]=useState(0);
-    const handleAddingTIme=()=>{
-       const total= totalHovers * 60 + totalMinutes + hovers * 60 + minutes;
+  const [hovers, setHovers] = useState("");
+  const [minutes, setMinutes] = useState("");
+  const [totalHovers, setTotalHovers] = useState(0);
+  const [totalMinutes, setTotalMinutes] = useState(0);
+  const [resetFields, setResetFields] = useState(false);
 
-       // Calculate total hover and total minutes from the total time
-       const newTotalHover = Math.floor(total/60);
-       const newTotalMinutes=Math.floor(total%60);
+  const handleAddingTime = () => {
+    const hoversValue = parseInt(hovers, 10) || 0;
+    const minutesValue = parseInt(minutes, 10) || 0;
 
-       // update the state with the new total time
-       setTotalHovers(newTotalHover);
-       setTodalMinutes(newTotalMinutes);
+    const total =
+      totalHovers * 60 + totalMinutes + hoversValue * 60 + minutesValue;
 
-       // clear the input field
-       setHovers(0);
-       setMinutes(0)
-    }
+    // Calculate total hover and total minutes from the total time
+    const newTotalHover = Math.floor(total / 60);
+    const newTotalMinutes = Math.floor(total % 60);
 
-    console.log(totalHovers,totalMinutes)
+    // update the state with the new total time
+    setTotalHovers(newTotalHover);
+    setTotalMinutes(newTotalMinutes);
+
+    // clear the input fields
+    setHovers("");
+    setMinutes("");
+    setResetFields(false);
+  };
+
+  const handleReset = () => {
+    setHovers("");
+    setMinutes("");
+    setTotalHovers(0);
+    setTotalMinutes(0);
+    setResetFields(true);
+  };
+
   return (
- <>
-   <Layout className="time-layout">
+    <div className="time-management">
+      <h1 className="time-management__heading">Time Management</h1>
+      <div className="time-management__wrapper">
+        <div className="time-adding__management">
+          <p className="time-adding__heading">Adding Time (Calculate)</p>
+          <input
+            type="number"
+            value={hovers}
+            onChange={(e) => setHovers(e.target.value)}
+            placeholder="Enter hours (digits or integer format)"
+            className="time-hover__field"
+          />
+          <input
+            type="number"
+            value={minutes}
+            onChange={(e) => setMinutes(e.target.value)}
+            placeholder="Enter minutes (digits or integer format)"
+            className="time-minute__field"
+          />
 
+          <div className="time-button__wrapper">
+            <button onClick={handleReset} className="reset-time__button">
+              Reset
+            </button>
 
-    <h1 className='time-heading'>Time Management</h1>
-   <Divider style={{border:"1px solid silver"}}/>
- <Row >
-    <Col span={12} col-6 >
-    <Form
-      layout="vertical"
-    >
-      <Form.Item label="Enter hover">
-      <Input  type='number' value={hovers} onChange={(e)=>setHovers(parseInt((e.target.value),10)||0)} placeholder='Enter hovers only digit or intigir format' size="large"/>
-      </Form.Item>
-      <Form.Item
-        label="Enter minute"
-      >
-         <Input type='number' value={minutes} onChange={(e)=>setMinutes(parseInt((e.target.value),10)||0)} placeholder='Enter minutes only digit or intigir or number format' size="large" />
-      </Form.Item>
-      <Divider style={{border:"1px solid silver"}}/>
-        <Form.Item>
-        <Button type="primary" onClick={handleAddingTIme}>Submit</Button>
-      </Form.Item>
-       
-    </Form>
-    <div> Total Hovers {totalHovers}</div>
-    <div> Total Minutes {totalMinutes}</div>
-    </Col>
-    <Col span={12} col-6>
-   Subtract
-    </Col>
-  </Row>
+            <button onClick={handleAddingTime} className="add-time__button">
+              Add Time
+            </button>
+          </div>
+          <div> Your total hours is : {totalHovers}</div>
+          <div>Your total minutes is : {totalMinutes}</div>
+        </div>
 
+        <div className="time-sub__management">
+          <p className="time-sub__heading">Substract Time (Calculate)</p>
+          <input
+            type="number"
+            value={hovers}
+            onChange={(e) => setHovers(e.target.value)}
+            placeholder="Enter hours (digits or integer format)"
+            className="time-hover__field"
+          />
+          <input
+            type="number"
+            value={minutes}
+            onChange={(e) => setMinutes(e.target.value)}
+            placeholder="Enter minutes (digits or integer format)"
+            className="time-minute__field"
+          />
 
-  </Layout>
- </>
-  )
-}
+          <div className="time-button__wrapper">
+            <button onClick={handleReset} className="reset-time__button">
+              Reset
+            </button>
 
-export default AddingTime
+            <button onClick={handleAddingTime} className="add-time__button">
+              Substract Time
+            </button>
+          </div>
+          <div> Your total hours is : {totalHovers}</div>
+          <div>Your total minutes is : {totalMinutes}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AddingTime;
